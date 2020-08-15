@@ -1,14 +1,12 @@
 const express = require("express");
 const app = express();
-const dotenv = require("dotenv");
 const mongoose = require("mongoose");
 const morgan = require("morgan");
 const port = process.env.PRIVATE_PORT || 3001;
 const User = require("../models/User");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
-const { validate } = require("../validations/validation");
-dotenv.config({ path: "../.env", debug: true });
+const { validate } = require("../middlewares/validation");
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(morgan("dev"));

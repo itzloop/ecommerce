@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon -r dotenv/config server.js dotenv_config_path=./configs/.env",
-    "admin": "cd admin_server/ && nodemon index.js",
+    "admin": "cd admin_server/ && nodemon -r dotenv/config index.js dotenv_config_path=../configs/.env",
     "test": "env-cmd -f ./configs/test.env jest --detectOpenHandles"
   },
   "author": "LooP",
