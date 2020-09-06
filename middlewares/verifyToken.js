@@ -8,7 +8,7 @@ const verifyToken = (req, res, next) => {
     req.user = verfied;
     next();
   } catch (e) {
-    es.status(401).json({ detail: "Unauthorization!" });
+    res.status(401).json({ detail: "Unauthorization!" });
   }
 };
 

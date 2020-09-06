@@ -3,11 +3,7 @@
 import {createSlice} from '@reduxjs/toolkit';
 
 const initialState = {
-  user: {
-    email: '',
-    password: '',
-    token: '',
-  },
+  user: null,
   loading: false,
 };
 
@@ -18,37 +14,21 @@ const slice = createSlice({
     login: (state, action) => {
       return {
         ...state,
-        user: {
-          ...state.user,
-          email: action.payload.email,
-          password: action.payload.password,
-        },
-
         loading: true,
       };
     },
     signup: (state, action) => {
       return {
         ...state,
-        user: {
-          ...state.user,
-          name: action.payload.name,
-          email: action.payload.email,
-          password: action.payload.password,
-        },
-
         loading: true,
       };
     },
     auth_success: (state, action) => {
-      const user = state.user;
       const data = action.payload;
-      console.log(action.payload);
       return {
         ...state,
         user: {
-          ...user,
-          token: data.token,
+          ...data,
         },
         loading: false,
       };
@@ -60,7 +40,23 @@ const slice = createSlice({
         loading: action.payload,
       };
     },
+    initialize: (state, action) => {
+      return {
+        ...state,
+        user: action.payload,
+      };
+    },
+
+    getProfile: (state) => {
+      return {...state, loading: true};
+    },
+    getProfileSuccess: (state, action) => {
+      return {...state, ...action.payload, loading: false};
+    },
   },
 });
 
+const actions = slice.actions;
+const reduecrs = slice.reducer;
+export {actions, reduecrs};
 export default slice;

@@ -4,6 +4,9 @@ import createSagaMiddleware from 'redux-saga';
 import settingsSlice from './reducers/settingsReducer';
 import userSlice from './reducers/userReducer';
 import errorSlice from './reducers/errorReducer';
+import categorySlice from './reducers/categoryReducer';
+import productSlice from './reducers/productsReducer';
+import appSlice from './reducers/appReducer';
 import rootSaga from './sagas';
 
 const sagaMiddleWare = createSagaMiddleware();
@@ -12,6 +15,9 @@ const reducer = combineReducers({
   settings: settingsSlice.reducer,
   user: userSlice.reducer,
   error: errorSlice.reducer,
+  categories: categorySlice.reducer,
+  products: productSlice.reducer,
+  app: appSlice.reducer,
 });
 
 // const devTools =

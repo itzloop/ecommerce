@@ -28,5 +28,8 @@ const slice = createSlice({
     },
   },
 });
+const actions = slice.actions;
+const reducers = slice.reducer;
+export {actions, reducers};
 
 export default slice;

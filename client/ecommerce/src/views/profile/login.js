@@ -12,17 +12,21 @@ import {
 import Colors from '../../res/values/colors';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Utils from '../../scripts/utils';
+import LocalStroage from '../../api/localStroage';
 import {connect} from 'react-redux';
 import userSlice from '../../scripts/redux/reducers/userReducer';
 import RedButton from '../../componets/RedButton';
 import PasswordInput from '../../componets/PasswordInput';
 
-const Login = ({navigation, route, login}) => {
+const Login = ({navigation, route, login, user}) => {
   const [password, setPass] = useState('');
   const [email, setEmail] = useState('');
+
   return (
     <View style={styles.container}>
-      <Pressable style={styles.settings}>
+      <Pressable
+        style={styles.settings}
+        onPress={() => navigation.push('Settings')}>
         <Ionicons
           name="settings-outline"
           color={Colors.COLOR_DARK}
@@ -73,9 +77,10 @@ const Login = ({navigation, route, login}) => {
   );
 };
 
-const mapStateToProps = (state /*, ownProps*/) => {
+const mapStateToProps = (state) => {
   return {
     loading: state.user.loading,
+    user: state.user.user,
   };
 };
 const mapDispatchToProps = (dispatch) => {

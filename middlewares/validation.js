@@ -22,6 +22,7 @@ const productSchema = {
   in_stock: Joi.number().required(),
   description: Joi.string().required(),
   categories: Joi.array().required(),
+  thumbnail: Joi.string().uri().required(),
 };
 
 const cartSchema = {

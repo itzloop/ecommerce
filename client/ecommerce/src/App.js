@@ -14,17 +14,9 @@ import Utils from './scripts/utils';
 import Constants from './res/values/constants';
 import {Provider} from 'react-redux';
 import Store from './scripts/redux/store';
+import {useReduxDevToolsExtension} from '@react-navigation/devtools';
 const Tab = createBottomTabNavigator();
 function setTabs() {
-  Utils.initializeData()
-    .next()
-    .then((x) => {
-      console.log(x.value);
-    })
-    .then((x) => {
-      console.log(x);
-    });
-
   let arr = Utils.constructTabNames('english');
   const items = [];
   arr.forEach((e) => {
@@ -39,30 +31,31 @@ function setTabs() {
       />,
     );
   });
-  return (
-    <Tab.Navigator
-      initialRouteName={'Home'}
-      tabBarOptions={{
-        labelStyle: {
-          fontSize: 16,
-        },
-        activeTintColor: '#333333',
-        inactiveTintColor: 'gray',
-      }}
-      screenOptions={({route}) => ({
-        tabBarIcon: ({focused, color, size}) =>
-          Utils.setTabIcons(route.name, focused, color, size),
-      })}>
-      {items}
-    </Tab.Navigator>
-  );
+  return items;
 }
 
 const App = () => {
+  const navRef = React.useRef();
+  useReduxDevToolsExtension(navRef);
+
   return (
     <Provider store={Store}>
-      <NavigationContainer theme={Constants.MyTheme}>
-        {setTabs()}
+      <NavigationContainer ref={navRef} theme={Constants.MyTheme}>
+        <Tab.Navigator
+          initialRouteName={'Home'}
+          tabBarOptions={{
+            labelStyle: {
+              fontSize: 16,
+            },
+            activeTintColor: '#333333',
+            inactiveTintColor: 'gray',
+          }}
+          screenOptions={({route}) => ({
+            tabBarIcon: ({focused, color, size}) =>
+              Utils.setTabIcons(route.name, focused, color, size),
+          })}>
+          {setTabs()}
+        </Tab.Navigator>
       </NavigationContainer>
     </Provider>
   );

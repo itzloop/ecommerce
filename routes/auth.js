@@ -16,7 +16,7 @@ router.post("/register", validate("register"), async (req, res) => {
       password: hashed,
     });
     await user.save();
-    res.status(201).json({ detail: "User Created!" });
+    res.status(201).json({ name: user.name, email: user.email });
   } catch (e) {
     if (e.code === 11000)
       return res.status(409).json({ detail: "User exists!" });
